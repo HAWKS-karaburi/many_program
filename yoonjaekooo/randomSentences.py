@@ -1,7 +1,7 @@
 #
-# Used Gemini-3-Flash
+# Used Gemini-3-Flash + Claude Sonnet 4.6
 # Owner: yoonjaekooo
-# 헛소리 생성기
+# 헛소리 생성기 (뇌절 강화판)
 #
 
 from __future__ import annotations
@@ -21,6 +21,9 @@ class WordPack:
     startup_terms: list[str] = field(default_factory=list)
     government_terms: list[str] = field(default_factory=list)
     company_terms: list[str] = field(default_factory=list)
+    buzz_english: list[str] = field(default_factory=list)
+    acronyms: list[str] = field(default_factory=list)
+    closing_phrases: list[str] = field(default_factory=list)
 
 
 class BrainDeadGenerator:
@@ -30,7 +33,12 @@ class BrainDeadGenerator:
         self.prefixes = [
             "차세대", "분산형", "AI 기반", "지능형", "자율형", "연계형", "통합형", "실시간",
             "클라우드 기반", "디지털 트윈 기반", "초연결", "블록체인 기반", "멀티레벨", "하이브리드",
-            "오토메이티드", "메타버스형", "스마트", "네트워크형", "의사결정형", "지능화된"
+            "오토메이티드", "메타버스형", "스마트", "네트워크형", "의사결정형", "지능화된",
+            # --- 뇌절 강화: 추가 접두사 ---
+            "초협력적", "양자내성", "탄소중립형", "ESG연계형", "넷제로", "온디바이스",
+            "프라이버시바이디자인", "제로트러스트", "풀스택", "엔드투엔드", "데이터드리븐",
+            "휴먼인더루프", "버티컬형", "호라이즌형", "리얼타임 임팩트형", "초개인맞춤형",
+            "탈중앙화", "엣지네이티브", "옵저버빌리티 강화", "셀프힐링형"
         ]
         self.random = random.Random()
 
@@ -132,6 +140,32 @@ class BrainDeadGenerator:
             ],
             ["보고서", "전략", "지표", "개선", "분석", "모델", "대시보드", "운영", "기준", "체계", "포인트", "정책", "시스템", "프로세스", "플랫폼", "워크플로", "인사이트", "모듈", "서비스", "아키텍처"],
         )
+        # --- 뇌절 강화: 신규 카테고리 ---
+        pack.buzz_english = [
+            "synergy", "leverage", "paradigm shift", "disruption", "scalability",
+            "deep dive", "low-hanging fruit", "north star metric", "win-win",
+            "bandwidth", "circle back", "move the needle", "value proposition",
+            "best practice", "actionable insight", "ecosystem play", "growth hacking",
+            "blue ocean", "first mover advantage", "bleeding edge", "agile mindset",
+            "thought leadership", "core competency", "game changer", "holistic approach",
+        ]
+        pack.acronyms = [
+            "KPI", "OKR", "ROI", "TF", "PoC", "MVP", "SLA", "TCO", "B2B", "B2C",
+            "API", "SDK", "CRM", "ERP", "QA", "R&D", "CTO", "CSO", "DAU", "MAU",
+            "NPS", "CAC", "LTV", "MOU", "RFP",
+        ]
+        pack.closing_phrases = [
+            "를 위한 TF를 즉시 구성한다",
+            "에 대한 로드맵을 차질없이 수립한다",
+            "의 거버넌스 체계를 전사적으로 정립한다",
+            "을 위한 협의체를 신속히 발족한다",
+            "에 대한 추진단을 한시적으로 운영한다",
+            "의 성과지표를 분기별로 재점검한다",
+            "을 위한 파일럿을 선제적으로 추진한다",
+            "에 대한 컨센서스를 전방위적으로 형성한다",
+            "의 액션플랜을 수립하고 즉시 실행한다",
+            "을 위한 워킹그룹을 상시 가동한다",
+        ]
         return pack
 
     def _generate_words(self, stems: list[str], endings: list[str], min_count: int = 100) -> list[str]:
@@ -216,6 +250,17 @@ class BrainDeadGenerator:
             "{기업용어} 관점의 {형용사} {명사} 레버리지 구조",
             "{정부과제용어}와 {스타트업용어}를 결합한 {형용사} {명사} 전략",
             "{형용사} {명사} 운영을 위한 {기술용어} 및 {기업용어} 프레임워크",
+            # --- 뇌절 강화: 영어 버즈워드 / 약자 / 순환논리 / 종결구 템플릿 ---
+            "{영어버즈} 관점에서 본 {형용사} {명사}의 {기술용어} 전략",
+            "{약자} 기반 {형용사} {명사} {약자} 달성 체계",
+            "{영어버즈}를 {동사} {형용사} {기업용어} {명사}",
+            "본 {명사}는 본 {명사}의 {형용사} 목적을 달성하기 위해 {기술용어}를 {동사}",
+            "{형용사} {명사}{종결구}",
+            "{기업용어}와 {정부과제용어}의 {영어버즈}를 통한 {형용사} {명사}{종결구}",
+            "{스타트업용어} 기반 {약자} 향상을 위한 {형용사} {기술용어} {영어버즈}",
+            "{명사}의 {형용사} {명사}화는 {명사}의 {형용사} {명사}화를 전제로 {동사}",
+            "{기술용어} {영어버즈} 기반 {약자}/{약자} 동시 개선 {명사}",
+            "{형용사} {명사} {영어버즈}를 위한 {기업용어} {종결구}",
         ]
 
     def _pick_word(self, category: str) -> str:
@@ -228,6 +273,9 @@ class BrainDeadGenerator:
             "스타트업용어": self.word_pack.startup_terms,
             "정부과제용어": self.word_pack.government_terms,
             "기업용어": self.word_pack.company_terms,
+            "영어버즈": self.word_pack.buzz_english,
+            "약자": self.word_pack.acronyms,
+            "종결구": self.word_pack.closing_phrases,
         }
         return self.random.choice(mapping[category])
 
@@ -243,6 +291,20 @@ class BrainDeadGenerator:
             return expanded
         return phrase
 
+    def _maybe_inject_buzzword(self, text: str, brain_level: int) -> str:
+        """뇌절 강화: 뇌절 레벨이 높을수록 영어 버즈워드/약자를 한글 단어 경계에 자연스럽게 삽입.
+        (영단어 토큰 자체를 쪼개지 않도록 순수 한글 토큰 뒤에만 붙인다.)"""
+        inject_chance = min(brain_level, 150) / 300.0
+        if self.random.random() < inject_chance:
+            buzz = self.random.choice(self.word_pack.buzz_english + self.word_pack.acronyms)
+            words = text.split(" ")
+            candidates = [i for i, w in enumerate(words) if w.isascii() is False and "(" not in w]
+            if candidates:
+                insert_at = self.random.choice(candidates)
+                words.insert(insert_at + 1, f"({buzz})")
+                return " ".join(words)
+        return text
+
     def _fill_template(self, template: str, brain_level: int) -> str:
         values = {
             "형용사": self._expand_phrase(self._pick_word("형용사"), brain_level),
@@ -253,8 +315,13 @@ class BrainDeadGenerator:
             "스타트업용어": self._expand_phrase(self._pick_word("스타트업용어"), brain_level),
             "정부과제용어": self._expand_phrase(self._pick_word("정부과제용어"), brain_level),
             "기업용어": self._expand_phrase(self._pick_word("기업용어"), brain_level),
+            # --- 뇌절 강화: 신규 카테고리 값 ---
+            "영어버즈": self._pick_word("영어버즈"),
+            "약자": self._pick_word("약자"),
+            "종결구": self._pick_word("종결구"),
         }
-        return template.format(**values)
+        filled = template.format(**values)
+        return self._maybe_inject_buzzword(filled, brain_level)
 
     def _word_count(self, text: str) -> int:
         return len(text.split())
@@ -304,6 +371,11 @@ class BrainDeadGenerator:
         elif self._word_count(sentence) < target_words:
             while self._word_count(sentence) < target_words:
                 sentence = f"{sentence} {self._fill_template(self.random.choice(self.templates), brain_level)}"
+
+        # --- 뇌절 강화: HYPER 모드 종결구 강제 부착 ---
+        if mode == "INSANE" and brain_level >= 90 and self.random.random() < 0.7:
+            sentence = f"{sentence} 결론적으로, 이는 {self._pick_word('영어버즈')} 관점에서 {self._pick_word('약자')}{self.random.choice(self.word_pack.closing_phrases)}"
+
         return sentence.replace("  ", " ").strip().rstrip(".") + "."
 
     def generate_project_name(self) -> str:
@@ -312,6 +384,7 @@ class BrainDeadGenerator:
             "{형용사} {명사} 최적화 플랫폼",
             "{스타트업용어} 기반 {명사} 솔루션",
             "{형용사} {명사} 디지털 플랫폼",
+            "{약자} 연동 {형용사} {명사} {영어버즈} 플랫폼",
         ]
         return self._fill_template(self.random.choice(templates), 40).replace("  ", " ").strip()
 
@@ -320,6 +393,7 @@ class BrainDeadGenerator:
             "{기술용어} 기반 {명사} 자원 활용을 위한 {형용사} {명사} 자동화 기술 개발",
             "{정부과제용어} 연계 {형용사} {명사} 실증 연구 개발",
             "{기업용어} 중심 {명사} 혁신을 위한 {형용사} {기술용어} 기반 정책 실험",
+            "{정부과제용어}와 {약자} 지표를 연계한 {형용사} {명사} {영어버즈} 사업",
         ]
         return self._fill_template(self.random.choice(templates), 70).replace("  ", " ").strip()
 
@@ -328,22 +402,25 @@ class BrainDeadGenerator:
             "{형용사} {명사} 데이터 생태계를 혁신하는 {기술용어} 솔루션",
             "{스타트업용어} 기반 {명사} 플랫폼으로 {형용사} 가치를 창출하는 {기술용어}",
             "분산형 {명사} 생태계를 재구성하는 AI 기반 {기술용어} 서비스",
+            "{영어버즈}를 극대화하는 {형용사} {명사} {스타트업용어} 솔루션",
         ]
         values = {
             "형용사": self._expand_phrase(self._pick_word("형용사"), 55),
             "명사": self._expand_phrase(self._pick_word("명사"), 55),
             "기술용어": self._expand_phrase(self._pick_word("기술용어"), 55),
             "스타트업용어": self._expand_phrase(self._pick_word("스타트업용어"), 55),
+            "영어버즈": self._pick_word("영어버즈"),
         }
         return self.random.choice(templates).format(**values).replace("  ", " ").strip()
 
     def generate_hyper_brain_dead(self) -> str:
-        return self.generate_sentence(brain_level=150, mode="INSANE")
+        # --- 뇌절 강화: 핵뇌절 레벨 상향 (150 -> 200) ---
+        return self.generate_sentence(brain_level=200, mode="INSANE")
 
 
 def main() -> None:
     generator = BrainDeadGenerator()
-    print("=== 뇌절 문장 생성기 ===")
+    print("=== 뇌절 문장 생성기 (강화판) ===")
     print("1. 프로젝트명 생성")
     print("2. 국책과제 생성")
     print("3. 스타트업 소개 생성")
