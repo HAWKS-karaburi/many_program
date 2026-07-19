@@ -41,7 +41,4 @@ Pacto7107/틱택토/
    └─ run_demo.sh
 ```
 
-원하시면:
-- AI를 강화(minimax)하거나
-- ncurses 인터페이스를 추가하거나
-- 단위 테스트(Catch2 등)를 추가해드릴 수 있습니다.
+made by 깃허브 코파일럿
